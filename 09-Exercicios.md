@@ -105,3 +105,30 @@ R: Criado a partir das classes records geradas
 - D. create custom partitioner [X]
 
 R: criar um partitioner próprio com a lógica necessária
+
+### Which offset commit strategy should be used in an at-most once consuming scenario?
+R: Fazer commit antes de processar
+At-most once significa que será processado exatamente uma vez ou não.
+
+### What kind of Kafka Streams window has fixed-size, is non-overlapping and gap-less?
+R: Tumbling
+
+### Running Kafka in production, what's a proper value for setting the java heap size?
+R: 6GB
+
+### Using Kafka Connect Source to read data from an external database, which processes do the actual work and execute connectors and tasks?
+R: Workers
+
+### What's the main benefit for adding a callback when sending a record?
+R: Lidar de maneira assincrona com resposta/erros
+
+### By default, what's the encryption mechanism used by Apache Kafka?
+R: PLAINTEXT
+
+### What option best describes a Kafka Broker?
+R: Um processo JVM que está rodando em uma máquina e servindo de host para tópicos. Cada broker é identificado com seu id unico, inteiro e atua como um intermediador entre os produtores e consumidores. O Broker recebe mensagens dos producers e permite que os consumers façam fetch das mensagens por tópicos, partição e offset.
+
+R: A Kafka Broker is nothing more, nothing less, than a JVM process that runs on a machine and hosts topics. Each broker is identified with its unique ID (integer) and acts as the middleman between producers and consumers. The broker receives messages from producers and allows consumers to fetch messages by topic, partition and offset.
+
+### What admin api do?
+R: Admin API serve para gerenciar e inspecionar tópicos, brokers, ACLs e outrs objetos Kafka.

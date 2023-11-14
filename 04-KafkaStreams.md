@@ -1,1 +1,1 @@
-# KafkaStreams
+# KafkaStreams (Core API)

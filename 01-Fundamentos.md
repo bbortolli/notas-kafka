@@ -38,7 +38,7 @@ Responsável por transformar a mensagem do Kafka para a aplicação
 # Partitioner
 Classe responsável por definir em qual partição a mensagem com uma dada chave será escrita.
 
-# Kafka Producers
+# Kafka Producers (Producer Core Api)
 Responsável por escrever mensagens no Kafka.
 Para enviar uma mensagem o seguinte fluxo acontece:
 1. Criar um objeto ProducerRecord
@@ -48,7 +48,7 @@ Para enviar uma mensagem o seguinte fluxo acontece:
 5. 1. Em caso de sucesso retorna um Future de metadados
    2. Em caso de falha, faz retry ou lança exception
 
-# Kafka Consumers
+# Kafka Consumers (Consumer Core Api)
 Responsável por ler as mensagens de uma ou mais partições do(s) tópico(s) no qual ele faz subscribe.
 
 # Consumer Group
