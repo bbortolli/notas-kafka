@@ -222,11 +222,11 @@ R: C. This is active-passing as the replicated topic is used for read-only purpo
 ### Partition leader election is done by
 
 - A. The consumers
-- B. The Kafka Broker that is the Controller [X]
-- C. Zookeeper
+- B. The Kafka Broker that is the Controller
+- C. Zookeeper [X]
 - D. Vote amongst the brokers
 
-R: B. The Controller is a broker that is responsible for electing partition leaders
+R: C; o Zookeper é o responsável por eleger
 
 ### Your topic is log compacted and you are sending a message with the key K and value null. What will happen?
 
@@ -317,3 +317,13 @@ R: A; Here, we need to change the setting max.poll.interval.ms (default 300000) 
 - D. Each rack contains all the topics and partitions, effectively making Kafka highly available
 
 R: C; Partitions for newly created topics are assigned in a rack alternating manner, this is the only change broker.rack does
+
+# Dumps
+
+https://www.dumpsmate.com/CCDAK-exam.html
+
+https://www.study4exam.com/confluent/free-ccdak-questions
+
+https://www.marks4sure.com/ccdak-confluent-certified-developer-for-apache-kafka-certification-examination-questions.html
+
+https://www.certshero.com/confluent/ccdak/practice-test
