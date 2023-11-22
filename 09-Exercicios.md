@@ -215,18 +215,18 @@ R: B, D. Preferred leader is a broker that was leader when topic was created. It
 Options:
 - A. Passive-Passive
 - B. Active-Active
-- C. Active-Passive
+- C. Active-Passive [X]
 
-R: C. This is active-passing as the replicated topic is used for read-only purposes only
+R: C. This is active-passive as the replicated topic is used for read-only purposes only
 
 ### Partition leader election is done by
 
 - A. The consumers
-- B. The Kafka Broker that is the Controller
+- B. The Kafka Broker that is the Controller [X]
 - C. Zookeeper [X]
 - D. Vote amongst the brokers
 
-R: C; o Zookeper é o responsável por eleger
+R: B; complementando: o Zookeper é o responsável por eleger o Controller
 
 ### Your topic is log compacted and you are sending a message with the key K and value null. What will happen?
 
@@ -252,7 +252,7 @@ R: A; Exemplo: kafka-console-consumer --bootstrap-server 127.0.0.1:9092 --topic 
 
 Options:
 - A. 4
-- B. 5
+- B. 5 [X]
 - C. 2
 - D. 3
 - E. 6
