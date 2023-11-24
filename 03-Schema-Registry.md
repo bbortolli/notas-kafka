@@ -116,11 +116,11 @@ Modos transitivos compatibilidade
 - atualizar CONSUMER primeiro
 
 #### Forward
-- deletar campos que tenham valor default
+- deletar campos que tenham valor default (opcionais)
 - adicionar novos campos
 - atualizar PRODUCER primeiro
 
 #### Full
-- deletar campos com valor default
-- adicionar campos com valor default
+- deletar campos com valor default (opcionais)
+- adicionar campos com valor default (opcionais)
 - não exige ordem para atualizar producer/consumer

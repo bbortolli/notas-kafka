@@ -37,3 +37,41 @@ R: A topic partition is an actual storage unit of Kafka messages which can be as
   Each segment is composed of the following two indexes (files):
   - An offset to position index, that allows Kafka to find the starting position of a message.
   - A timestamp to offset index, that allows Kafka to find messages for a timestamp.
+
+# REST API
+
+- Informações básicas do cluster (versao worker, commit e kafka cluster id)
+```shell
+curl http://localhost:8083/
+```
+
+- Plugins instalados
+```shell
+curl -s localhost:8083/connector-plugins
+```
+
+- List Connector Instances
+```shell
+curl -s -X GET "http://localhost:8083/connectors/"
+```
+
+- Inspect Config and Status for a Connector
+```shell
+curl -i -X GET -H  "Content-Type:application/json" http://localhost:8083/connectors/sink-elastic-orders-00/config
+```
+
+- Delete a Connector
+```shell
+curl -s -X DELETE "http://localhost:8083/connectors/sink-elastic-orders-00"
+```
+
+# Metricas Confluent
+Confluent Metrics API
+The Confluent Cloud Metrics API provides actionable operational metrics about your Confluent Cloud deployment. This is a queryable HTTP API in which the user will POST a query written in JSON and get back a time series of metrics specified by the query.
+
+Metrics API endpoints are available to:
+- List metric descriptors
+- List resource descriptors
+- Query metric values
+- Export metric values
+- Query label values
