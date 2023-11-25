@@ -318,6 +318,13 @@ R: A; Here, we need to change the setting max.poll.interval.ms (default 300000) 
 
 R: C; Partitions for newly created topics are assigned in a rack alternating manner, this is the only change broker.rack does
 
+### Whats the structure of a partition?
+
+R: A topic partition is an actual storage unit of Kafka messages which can be assumed as a Kafka message queue. The number of partitions per topic are configurable while creating it. Messages in a partition are segregated into multiple segments to ease finding a message by its offset.
+  Each segment is composed of the following two indexes (files):
+  - An offset to position index, that allows Kafka to find the starting position of a message.
+  - A timestamp to offset index, that allows Kafka to find messages for a timestamp.
+
 # Dumps
 
 https://www.dumpsmate.com/CCDAK-exam.html

@@ -5,6 +5,10 @@
 - programa de processamento de eventos escrito em SQL
 - CLI, REST API, Java lib e integração com Kafka Connect
 
+*OBS*
+1. Permite queries, leituras e escritas, e processamento de dados no Kafka em tempo-real e também escalável usando sintaxe intuitiva SQL
+2. Não requer conhecer linguagem de PROGRAMAÇÃO como Java ou Scala e voce nao precisa instalar separadamente um cluster para esse tecnologia.
+
 ## Transformando Dados
 
 ksqlDB permite transformar eventos em um stream e enviar para um novo stream.

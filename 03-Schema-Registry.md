@@ -27,7 +27,17 @@ Producer e Consumer buscam o Schema via http request e armazenam em cache
 - valores default de acordo com o tipo do campo
 
 ## Avro
-- type = record, namespace = io.confluent.developer.avro, name="example", fields [...]
+- Estrutura de um tipo complexo
+  1. type REQUIRED
+  2. fields REQUIRED
+  3. namespace
+
+- Estrutura de um field
+  1. type
+  2. name
+  3. Em alguns casos pode ser obrigatório conter symbols, items, default
+  4. DOC é totalmente opcional
+
 - field composto por name, type
 - o tipo pode ser um array de tipos, funciona parecido com o "one of" do protobuf
 - pode referenciar outros schemas
@@ -41,6 +51,14 @@ Producer e Consumer buscam o Schema via http request e armazenam em cache
   - bytes: sequence of 8-bit unsigned bytes.
   - string: unicode character sequence.
 
+- Tipos complexos:
+  - Record
+  - Enum
+  - Array
+  - Map
+  - Union
+  - Fixed
+
 ## Schema Manegement
 
 ### Register
@@ -48,7 +66,6 @@ O parametro subject é passado e usado para identificacao. Como um namespace par
 Exemplos de nome: topico-chave, topico-valor
 É gerado um id
 Automaticamente é colocado a versao 1 para novos schemas
-
 
 ```sh
 confluent schema-registry schema create \

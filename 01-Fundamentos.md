@@ -3,6 +3,9 @@
 ## O que é o Apache Kafka?
 O Apache Kafka é uma plataforma de streaming de eventos usada para coletar, processar, armazenar e integrar dados em grande escala.
 
+## Linguagens
+Kafka é feito em Java e Scala
+
 ## O que são Eventos?
 Um evento é qualquer tipo de ação, incidente ou mudança identificada ou registrada por um programa.
 
@@ -16,13 +19,28 @@ Um tópico é um registro de eventos (commit log) e são fáceis de entender, po
 
 Os logs também são fundamentalmente duráveis. É possível configurar o quão durável serão os logs.
 
+## Comunicação point-to-point
+
+Nesse tipo de comunicação que é DIFERENTE DO KAFKA existem 3 partes:
+1. Sender (produz a mensagem)
+2. Receiver (consome a mensagem)
+3. Queue (fila onde se escreve a mensagem)
+
+A mensagem só pode ser consumida uma unica vez
+
+## Comunicação Kafka
+Via TCP
+
 # Particionamento
 O particionamento divide o os tópicos em varias partes, cada uma dos quais pode existir em um nó separado no cluster Kafka. Dessa forma, o trabalho de armazenar mensagens, escrever novas mensagens e processar mensagens existentes pode ser dividido entre muitos nós no cluster.
 
 Depois de dividir um tópico em partições, precisamos de uma maneira de decidir quais mensagens escrever em quais partições. Normalmente, se uma mensagem não tiver uma chave, as mensagens subsequentes serão distribuídas de forma round-robin (circular) entre todas as partições do tópico. Nesse caso, todas as partições recebem uma parcela igual dos dados, mas não existirá ordenação das mensagens. Se a mensagem tiver uma chave, a partição de destino será calculada a partir de um hash da chave e assim permite que o Kafka garanta que as mensagens com a mesma chave sempre caiam na mesma partição e, portanto, estejam sempre em ordem.
 
+Partições são estruturadas de segmento que contém 2 índices: timestamp e offset
+
 # Kafka Brokers
 É uma máquina rodando o processo do Kafka. Não necessáriamente máquinas físicas separadas, podendo ser virtuais também. São independentes entre si e cada um desses gerencia um conjunto de partições. Os brokers são responsáveis para lidar com as requisições de escrita e leitura, e também lidam com a replicação das partições entre si.
+Cada broker deve conter um único id e um cenário multi-broker.
 
 # Replication
 O dado original é escrito e lida no broker leader e também nele persiste o dado no caso da escrita. Após isso são feitas cópias desses dados para os followers e com isso é possível obter um certo nível de segurança dos dados e de tolerância a falhas.
@@ -48,8 +66,44 @@ Para enviar uma mensagem o seguinte fluxo acontece:
 5. 1. Em caso de sucesso retorna um Future de metadados
    2. Em caso de falha, faz retry ou lança exception
 
+*OBS*
+1. A requisição do envio da mensagem é feita para o Lider da partição
+2. Não precisa de coordenação de grupo. é thread safe
+
+
 # Kafka Consumers (Consumer Core Api)
 Responsável por ler as mensagens de uma ou mais partições do(s) tópico(s) no qual ele faz subscribe.
 
+*OBS*: é necessário coordenação, não é thread safe
+
+# Maneiras de subscribe em tópicos
+```java
+// Pattern
+consumer.subscribe(Pattern.compile("*.topic"));
+// Array
+consumer.subscribe(Array.asList("topic-a", "topic-b"));
+```
+
 # Consumer Group
 Conjunto de consumers no qual consumirão de um mesmo tópico e dessa maneira é possível escalar a leitura desse tópico até no máximo um fator de 1 pra 1, ou seja, 1 partição para cada consumidor. Consumers a mais que o número de partições ficaram ociosos.
+
+## Leader do Grupo de Consumo
+O primeiro a se conectar no grupo
+
+## Rebalanceamento do grupo
+Dois casos diferentes causa um rebalanceamento:
+1. Quando um consumidor sai do grupo (ele notifica o lider)
+2. Um membro entra no grupo
+
+Quando isso acontece, as partições são reatribuidas aos membros do grupo de forma proporcional entre cada um deles
+
+## Estratégias de atribuição de partição
+- RangeAssignor (DEFAULT):
+Nesse modo cada consumidor recebe um segmento igual de cada topico.
+Exemplo: C1 recebe partições 0 e 1 do T1 e do T2. C2 recebe partições 2 do T1 e do T2
+
+- RoundRobinAssignor
+Uma partição de cada vez é atribuida a um consumidor. Um tópico de cada vez
+
+# Admin API
+Usada para fazer o gerenciamento e inspeção de tópicos, brokers, ACLs e outros objetos do Kafka.
