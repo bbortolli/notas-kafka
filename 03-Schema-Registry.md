@@ -12,6 +12,8 @@ Producer e Consumer buscam o Schema via http request e armazenam em cache
 - Producer E Consumer evitam mensagem incompativel com o schema na escrita/leitura
 - JSON Schema, Avro, Protobuff
 
+*OBS*: o próprio Kafka é usado como storage para o schema reg. No tópico __schemas
+
 ## Configuração
 - url
 - credentials { username, password }
@@ -86,11 +88,14 @@ confluent schema-registry schema describe \
 curl -u SECRET:KEY https://cluster/subjects/<nome-schema>/versions/latest
 
 curl -u SECRET:KEY https://cluster/subjects/<nome-schema>/versions/n
+
+curl -X GET http://localhost:8081/schemas/ids/1
 ```
 
 ### Ciclo de vida
 1. Producer tenta serializa um Record / Consumer tenta desserializar um Record
 2. (Des)Serializer procura no cache e nao encontra nada
+  1. *OBS*: O producer pode registrar o schema no SchemaRegistry
 3. Consulta o SchemaRegistry e guarda o id unico no cache
 4. Record serializado e enviado ao broker/ Record desserializado e consumido
 
@@ -141,3 +146,7 @@ Modos transitivos compatibilidade
 - deletar campos com valor default (opcionais)
 - adicionar campos com valor default (opcionais)
 - não exige ordem para atualizar producer/consumer
+
+## Confluent Schema Registry
+distributed storage layer for schemas which use kafka as storega mechanism
+allows evoluiton of schemas according to configured compatibility settings and expanded support

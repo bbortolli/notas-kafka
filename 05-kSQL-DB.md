@@ -9,6 +9,14 @@
 1. Permite queries, leituras e escritas, e processamento de dados no Kafka em tempo-real e também escalável usando sintaxe intuitiva SQL
 2. Não requer conhecer linguagem de PROGRAMAÇÃO como Java ou Scala e voce nao precisa instalar separadamente um cluster para esse tecnologia.
 
+## Dados aceitos
+ksqlDB currently supports the following formats:
+
+- DELIMITED (e. g. comma-separated value)
+- JSON
+- Avro message values are supported. Avro keys are not yet supported. This requires Schema Registry and ksql.schema.registry.url in the ksqlDB server configuration file.
+- KAFKA (for example, a BIGINT that's serialized using Kafka's standard LongSerializer).
+
 ## Transformando Dados
 
 ksqlDB permite transformar eventos em um stream e enviar para um novo stream.
@@ -22,6 +30,11 @@ ksqlDB pode ser usada para realizar diversas transformações quando lidando com
 - Changing field names (AS)
 - Dropping fields
 - Concatenating fields (CONCAT)
+
+## Deployment
+
+- interativo (via api rest)
+- headless (simples, via unico sql file)
 
 ## Exemplos
 

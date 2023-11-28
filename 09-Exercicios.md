@@ -325,6 +325,17 @@ R: A topic partition is an actual storage unit of Kafka messages which can be as
   - An offset to position index, that allows Kafka to find the starting position of a message.
   - A timestamp to offset index, that allows Kafka to find messages for a timestamp.
 
+### Qual file system usar em produção no Kafka
+XFS ou ext4.
+
+- XFS is a very high performance, scalable file system and is routinely deployed in the most demanding applications. It's RHEL 7 is the default file system and is supported on all architectures.
+
+- Ext4 does not scale to the same size as XFS, is fully supported on all architectures and will still continue to see active development and support.
+
+### A company produces Avro data on their production Kafka cluster that is integrated with the Confluent Schema Registry. After a schema change that is incompatible, the data gets rejected. Which component rejects the data?
+Confluent Schema Registry provides a serving layer for your metadata.
+Because all the schemas are stored inside the Confluent Schema Registry, that's the place where data gets rejected and incompatible schema changes are found.
+
 # Dumps
 
 https://www.dumpsmate.com/CCDAK-exam.html

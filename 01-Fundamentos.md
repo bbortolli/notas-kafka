@@ -87,12 +87,16 @@ consumer.subscribe(Array.asList("topic-a", "topic-b"));
 # Consumer Group
 Conjunto de consumers no qual consumirão de um mesmo tópico e dessa maneira é possível escalar a leitura desse tópico até no máximo um fator de 1 pra 1, ou seja, 1 partição para cada consumidor. Consumers a mais que o número de partições ficaram ociosos.
 
+## Group Coordinator
+é um dos brokers do cluster
+
 ## Leader do Grupo de Consumo
 O primeiro a se conectar no grupo
 
 ## Rebalanceamento do grupo
+Feito pelo coordinator do grupo
 Dois casos diferentes causa um rebalanceamento:
-1. Quando um consumidor sai do grupo (ele notifica o lider)
+1. Quando um consumidor sai do grupo (ele notifica o Coordinator)
 2. Um membro entra no grupo
 
 Quando isso acontece, as partições são reatribuidas aos membros do grupo de forma proporcional entre cada um deles
@@ -105,5 +109,26 @@ Exemplo: C1 recebe partições 0 e 1 do T1 e do T2. C2 recebe partições 2 do T
 - RoundRobinAssignor
 Uma partição de cada vez é atribuida a um consumidor. Um tópico de cada vez
 
+## Estratégias de commit
+- at-least once: commit no final/após processar
+- at-most once: commit no começo/antes de processar
+
 # Admin API
 Usada para fazer o gerenciamento e inspeção de tópicos, brokers, ACLs e outros objetos do Kafka.
+
+# MirrorMaker
+Kafka administrators can replicate topics, topic configurations, consumer groups, and ACLs from one or more source Kafka clusters to one or more target Kafka clusters, i. e., across cluster environments.
+
+Multi-datacenter deployments enable use-cases such as:
+
+- Active -> Active: geo-localized deployments: allows users to access a near-by data center to optimize their architecture for low latency and high performance. Replication can be done in both sides and data can be produced and consumed in every cluster.
+
+- Active-> Passive: disaster recover (DR) deployments: in an event of a partial or complete datacenter disaster, allow failing over applications to use Confluent Platform in a different datacenter.
+
+- Active -> Passive: centralized analytics: Aggregate data from multiple Apache Kafka clusters into one location for organization-wide analytics. No producers will be used at the replicated cluster, it's just for consuming data for analytic purposes.
+
+- Aggregation (e. g., from many clusters to one): A->K, B->K, C->K.
+
+- Fan-out (e. g., from one to many clusters): K->A, K->B, K->C.
+
+- Forwarding: A->B, B->C, C->D.
