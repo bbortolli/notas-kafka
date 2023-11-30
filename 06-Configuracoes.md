@@ -4,7 +4,8 @@
 - auto.create.topics.enable: em alguns comandos o tópico é criado caso nao exista e essa flag for true
 - replication.factor
 - min.insync.replicas
-- retention.ms
+- retention.ms (periodo default 1 semana)
+- log.cleanup.policy: delete(default), compact, max-size
 
 ## Encriptação
 - Plaintext (DEFAULT)

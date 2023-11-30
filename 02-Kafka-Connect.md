@@ -3,8 +3,6 @@
 Sistema para integração de dados. Um cliente externo que roda fora dos Brokers
 - Componente plugavel
 - Interface para sistemas externos e para o Kafka
-- Connector Source atuam como Producers
-- Connector Sink atuam como Consumers
 
 Componente do Apache Kafka® utilizado para realizar integração de streaming entre o Kafka e outros sistemas, como bancos de dados, serviços em nuvem, índices de pesquisa, sistemas de arquivos e armazenamentos de chave-valor.
 O Kafka Connect facilita a transmissão de dados de várias fontes para o Kafka e a transmissão de dados do Kafka para vários destinos.
@@ -26,6 +24,11 @@ Sempre que você deseja transmitir dados para o Kafka de outro sistema ou transm
 O alto nivel de abstração que coordena o fluxo de dados fazendo o gerenciamento das tasks
 
 Ao executar o Kafka Connect, instâncias de plugins do conector fornecem a integração entre sistemas externos de dados e o framework do Kafka Connect. Esses plugins do conector são componentes reutilizáveis que definem como os conectores de origem devem capturar dados das fontes de dados para um tópico do Kafka e também como os conectores de destino devem copiar dados dos tópicos do Kafka para serem reconhecidos por um sistema de destino. Ao cuidar de toda essa lógica padrão para você, os plugins permitem que você comece a usar o Kafka Connect rapidamente e concentre-se nos seus dados.
+
+## Tipos de connectors
+1. Source connector: Source connectors ingest entire databases and stream table updates to Kafka topics. Source connectors can also collect metrics from all your application servers and store the data in Kafka topics–making the data available for stream processing with low latency.
+
+2. Sink connector: Sink connectors deliver data from Kafka topics to secondary indexes, such as Elasticsearch, or batch systems such as Hadoop for offline analysis.
 
 ## Configurações necessárias do Connector
 - Nome unico do connector

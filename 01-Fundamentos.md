@@ -60,7 +60,9 @@ Classe responsável por definir em qual partição a mensagem com uma dada chave
 Responsável por escrever mensagens no Kafka.
 Para enviar uma mensagem o seguinte fluxo acontece:
 1. Criar um objeto ProducerRecord
+   - construtores (tv, tkv)
 2. Chamar o método .send()
+   - existe a opcao .get() para sync
 3. Serializer
 4. Partitioner
 5. 1. Em caso de sucesso retorna um Future de metadados
@@ -92,6 +94,9 @@ Conjunto de consumers no qual consumirão de um mesmo tópico e dessa maneira é
 
 ## Leader do Grupo de Consumo
 O primeiro a se conectar no grupo
+
+## Partition Leader
+Feito pelo Broker que é Controller
 
 ## Rebalanceamento do grupo
 Feito pelo coordinator do grupo

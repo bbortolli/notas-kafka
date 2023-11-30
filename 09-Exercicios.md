@@ -223,7 +223,7 @@ R: C. This is active-passive as the replicated topic is used for read-only purpo
 
 - A. The consumers
 - B. The Kafka Broker that is the Controller [X]
-- C. Zookeeper [X]
+- C. Zookeeper
 - D. Vote amongst the brokers
 
 R: B; complementando: o Zookeper é o responsável por eleger o Controller
